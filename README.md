@@ -37,7 +37,7 @@ Steps
 Clone the repository:
 sh
 Copy code
-git clone https://github.com/yourusername/stock-market-tutorials.git
+git clone [https://github.com/yourusername/stock-market-tutorials.git](https://github.com/bhagyeshmawale/stock_market_QandA_with_LLM.git)
 cd stock-market-tutorials
 Install dependencies:
 sh
