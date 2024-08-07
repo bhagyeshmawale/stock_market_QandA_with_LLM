@@ -1,4 +1,9 @@
-Stock Market Tutorials
+Stock Market Tutorials with B
+
+![image](https://github.com/user-attachments/assets/96a2515e-3a3f-4bcc-9d19-193db4f59136)
+![image](https://github.com/user-attachments/assets/5a9548c0-1dcd-4b60-9b8b-3662aa92b6df)
+
+
 Welcome to the Stock Market Tutorials application! This project leverages state-of-the-art technologies in Natural Language Processing (NLP) and Machine Learning to provide users with accurate and context-aware answers related to stock market queries.
 
 📋 Table of Contents
