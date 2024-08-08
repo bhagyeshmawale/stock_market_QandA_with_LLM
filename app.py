@@ -24,11 +24,11 @@ LANGCHAIN_PROJECT="stock_market"
 
 
 
-loader=PyPDFLoader('ssm.pdf')
-docs=loader.load()
+# loader=PyPDFLoader('ssm.pdf')
+# docs=loader.load()
 
-text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
-documents=text_splitter.split_documents(docs)
+# text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
+# documents=text_splitter.split_documents(docs)
 
 from langchain_chroma import Chroma
 from langchain_community.document_loaders import TextLoader
@@ -43,7 +43,7 @@ from langchain_community.embeddings.sentence_transformer import (
 
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
-db=FAISS.from_documents(documents[:30],OllamaEmbeddings(model="mxbai-embed-large"))
+# db=FAISS.from_documents(documents[:30],OllamaEmbeddings(model="mxbai-embed-large"))
 
 
 
@@ -66,7 +66,19 @@ llm=Ollama(model="llama3.1")
 document_chain=create_stuff_documents_chain(llm,prompt)
 
 
-retriever=db.as_retriever()
+if "vector" not in st.session_state:
+    st.session_state.embeddings=OllamaEmbeddings(model="mxbai-embed-large")
+    st.session_state.loader=PyPDFLoader('ssm.pdf')
+    st.session_state.docs=st.session_state.loader.load()
+
+    st.session_state.text_splitter=RecursiveCharacterTextSplitter(chunk_size=1000,chunk_overlap=200)
+    st.session_state.final_documents=st.session_state.text_splitter.split_documents(st.session_state.docs[:50])
+    st.session_state.vectors=FAISS.from_documents(st.session_state.final_documents,st.session_state.embeddings)
+
+
+
+
+retriever=st.session_state.vectors.as_retriever()
 
 retrieval_chain=create_retrieval_chain(retriever,document_chain)
 
